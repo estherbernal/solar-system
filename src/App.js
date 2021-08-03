@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BreakpointProvider } from 'react-socks'
+
+// Pages
+import Home from './pages/home/Home'
+import DetailPage from './pages/detailPage/DetailPage'
+
+// Components
+import Stars from './components/stars/Stars'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <BreakpointProvider>
+        <div className='stars-bg'>
+          <Stars />
+        </div>
+        <header>
+          <h1 className='fade-in'>The Solar System</h1>
+        </header>
+        <main className='container'>
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/:name' component={DetailPage} />
+          </Switch>
+        </main>
+      </BreakpointProvider>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

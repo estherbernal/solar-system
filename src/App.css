@@ -1,38 +1,582 @@
-.App {
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+  font-size: 1em;
+  line-height: 147%;
+  background: #161d46;
+  background: -moz-linear-gradient(top, #784360 0%, #161d46 100%);
+  background: -webkit-linear-gradient(top, #784360 0%, #161d46 100%);
+  background: linear-gradient(to bottom, #784360 0%, #161d46 100%);
+  font-family: sans-serif;
+}
+
+h1 {
+  display: inline-block;
+  font-family: 'Nixie One', cursive;
+  font-weight: 400;
+  font-size: 1em;
+  text-align: center;
+  letter-spacing: 4px;
+  line-height: 125%;
+  text-transform: uppercase;
+  margin: 0px 30px;
+  align-self: center;
+  background-color: white;
+  color: #232249;
+  border-radius: 5px;
+  padding: 10px 30px;
+}
+
+h2 {
+  font-family: 'Nixie One';
+  text-transform: uppercase;
+  font-size: 1.8em;
+  color: white;
+  letter-spacing: 5px;
+  min-width: 175px;
+  margin: 35px 0;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  background: none;
+  border: 0;
+}
+
+svg {
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+svg path {
+  fill: #fff;
+}
+
+.mass-icon {
+  height: 27px;
+  margin: 18px;
+}
+
+.moon-icon {
+  height: 35px;
+  margin: 15px;
+}
+
+.temperature-icon {
+  height: 35px;
+  margin: 15px;
+}
+
+.button {
+  overflow: hidden;
+  font-family: 'Nixie One';
+  font-weight: 400;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid white;
+  text-align: center;
+  align-self: center;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 10px 30px;
+  position: relative;
+  transition: all 0.4s ease;
+  max-width: 120px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.button:hover {
+  color: rgb(56, 56, 56);
+}
+
+.button::before {
+  overflow: hidden;
+  background-color: #fff;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 0;
+  transform: translate(-50%, -50%) rotate(-60deg);
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.button:hover::before {
+  height: 380%;
+}
+
+header {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* big buttons, no circle */
+.next {
+  position: absolute;
+  right: 0;
+}
+.flickity-prev-next-button {
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  margin: 10px;
+}
+/* arrow color */
+.flickity-prev-next-button .arrow {
+  fill: white;
+}
+.flickity-prev-next-button.no-svg {
+  color: white;
+}
+.flickity-prev-next-button:hover {
+  background: transparent;
+}
+/* hide disabled button */
+.flickity-prev-next-button:disabled {
+  display: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flickity-page-dots {
+  bottom: 0px;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-evenly;
+  padding: 0;
+  max-width: 450px;
+  margin: auto;
+}
+
+/* white circles */
+.flickity-page-dots .dot {
+  width: 15px;
+  height: 15px;
+  opacity: 1;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+/* fill-in selected dot */
+.flickity-page-dots .dot.is-selected {
+  background: white;
+}
+
+.sun {
+  width: 100px;
+  height: 100px;
+  background-color: #ffc107;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  -webkit-box-shadow: 0px 0px 63px 5px rgba(255, 102, 0, 1);
+  -moz-box-shadow: 0px 0px 63px 5px rgba(255, 102, 0, 1);
+  box-shadow: 0px 0px 63px 5px rgba(255, 102, 0, 1);
+}
+
+.stars-bg {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.simple-star {
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+}
+
+.special-star {
+  background-image: url(./components/stars/assets/images/star.png);
+  background-size: cover;
+  position: absolute;
+}
+
+.planets-list {
+  width: 100%;
+  overflow: hidden;
+}
+
+.planet-card {
+  width: 70%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  transition: all 1s;
+  max-width: 75%;
+  max-height: 75%;
+  width: auto;
+  height: auto;
+}
+
+.is-selected img {
+  transition: all 1s;
+  max-width: 85%;
+  max-height: 85%;
+  width: auto;
+  height: auto;
+}
+
+.planet-label {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-family: 'Nixie One';
+  padding: 0 40px;
+  min-width: 175px;
+  transition: all 2s;
+  margin-top: 0px;
+  opacity: 0;
+}
+
+.is-selected .planet-label {
+  transition: all 2s;
+  margin-top: 50px;
+  opacity: 1;
+}
+
+.breakpoint__large-up {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.planet-card article {
+  width: 100%;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.planet-image {
+  display: flex;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.planet-detail {
+  margin: auto;
+  width: 80%;
+  max-width: 1100px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.buttons-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.loading {
+  margin-top: 30px;
+}
+
+.loading-message {
+  text-transform: uppercase;
+  font-family: 'Nixie One';
+  letter-spacing: 2px;
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+.buttons-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.planet-data,
+.planet-description {
+  opacity: 1;
+  transition: ease all 0.6s;
+}
+
+.hide-card {
+  opacity: 0;
+  transition: ease all 0.6s;
+}
+
+.planet-info-wrapper {
+  position: relative;
+}
+
+.planet-data {
+  width: 100%;
+  top: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.planet-data p {
+  margin: 0;
+  padding: 0;
+  width: 18%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icons-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+/**
+* MEDIA QUERIES *
+**/
+
+@media (min-width: 991px) {
+  h3 {
+    font-size: 0.8em;
   }
-  to {
-    transform: rotate(360deg);
+
+  .button {
+    margin-top: 30px;
+  }
+
+  .planets-list {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .breakpoint__large-up {
+    width: calc(100% - 120px);
+    justify-content: space-evenly;
+  }
+
+  .planet-card {
+    width: 10%;
+    cursor: pointer;
+    /*height: auto;*/
+  }
+
+  .planet-card article {
+    height: 70vh;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .planet-label {
+    border: 0;
+  }
+
+  .planet-label-line {
+    border-left: 1px solid white;
+    transition: all 2s;
+    height: 0;
+    margin-bottom: 0;
+  }
+
+  .planet-card:hover .planet-label {
+    transition: all 2s;
+    /*margin-top: 100px;*/
+    opacity: 1;
+  }
+
+  .planet-label:hover {
+    opacity: 1;
+  }
+
+  .planet-card:hover .planet-label-line {
+    transition: all 2s;
+    height: 60px;
+    border-left: 1px solid white;
+    margin-bottom: 20px;
+  }
+
+  .planet-image {
+    align-items: start;
+  }
+
+  .planet-image img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .sun {
+    position: absolute;
+    left: -480px;
+    width: 600px;
+    height: 600px;
+    top: calc(50% - 300px);
+  }
+
+  .Mercury img {
+    width: 35%;
+    max-width: 100%;
+  }
+  .Venus img {
+    width: 70%;
+    max-width: 100%;
+  }
+  .Earth img {
+    width: 65%;
+    max-width: 100%;
+  }
+  .Mars img {
+    width: 60%;
+    max-width: 100%;
+  }
+  .Jupiter img {
+    width: 85%;
+    max-width: 100%;
+  }
+  .Saturn img {
+    width: 85%;
+    max-width: 100%;
+  }
+  .Uranus img {
+    width: 72%;
+    max-width: 100%;
+  }
+  .Neptune img {
+    width: 75%;
+    max-width: 100%;
+  }
+
+  .planet-detail {
+    flex-direction: row;
+  }
+
+  .planet-image {
+    width: 50%;
+  }
+
+  .planet-info {
+    width: 50%;
+  }
+}
+
+.Mercury {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 1s, planetsFloating 3.9s infinite 2.6s;
+}
+.Venus {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 1.3s, planetsFloating 4.4s infinite 2.9s;
+}
+.Earth {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 1.6s, planetsFloating 4.2s infinite 3.2s;
+}
+.Mars {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 1.9s, planetsFloating 3.7s infinite 3.5s;
+}
+.Jupiter {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 2.1s, planetsFloating 4s infinite 3.7s;
+}
+.Saturn {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 2.4s, planetsFloating 4.1s infinite 4s;
+}
+.Uranus {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 2.7s, planetsFloating 3.8s infinite 4.3s;
+}
+.Neptune {
+  opacity: 0;
+  animation: fadeIn 1.6s ease 3s, planetsFloating 3.5s infinite 4.6s;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fade 0.8s ease 0.8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes planetsFloating {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
