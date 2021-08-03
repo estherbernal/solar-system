@@ -2,7 +2,6 @@ import React from 'react'
 import { ReactComponent as DayNight } from '../../../files/SVG/day-night.svg'
 import { ReactComponent as DistanceSun } from '../../../files/SVG/distance-sun.svg'
 import { ReactComponent as Gravity } from '../../../files/SVG/gravity.svg'
-import { ReactComponent as Mass } from '../../../files/SVG/mass.svg'
 import { ReactComponent as Moon } from '../../../files/SVG/moon.svg'
 import { ReactComponent as Temperature } from '../../../files/SVG/temperature.svg'
 
@@ -17,10 +16,6 @@ const PlanetCardBack = ({ planet, isToggled }) => {
         <p>
           <Gravity />
           {planet.gravity}
-        </p>
-        <p>
-          <Mass className='mass-icon' />
-          {planet.mass}
         </p>
       </div>
       <div className='icons-wrapper'>
